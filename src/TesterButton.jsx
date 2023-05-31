@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+// import WebAudioRecorder from "web-audio-recorder-js";
 // import * as Tone from "tone";
 
 class TesterButton extends Component {
@@ -7,22 +8,23 @@ class TesterButton extends Component {
         super();
     };
 
-    coreAppStates = {
+    state = {
         isRecording: false,
-    }
+    };
 
     testButtonHandler = () => {
         console.log("test button called");
+        this.setState({isRecording: !this.state.isRecording});
     };
 
     recordingStateStr = () => {
-        return this.coreAppStates.isRecording ? "RECORDING" : "not recording";
+        return this.state.isRecording ? "RECORDING" : "not recording";
     };
 
     // The "danger" and "secondary" refer to bootstrap colors: danger means red, secondary means black.
     recordingColorStr = () => {
-        return this.coreAppStates.isRecording ? "danger" : "secondary";
-    }
+        return this.state.isRecording ? "danger" : "secondary";
+    };
 
     render() {
         return (
@@ -34,13 +36,12 @@ class TesterButton extends Component {
                     onClick={this.testButtonHandler}>StartStopRecording
                  </button>
 
-                <div className={`badge bg-${this.recordingColorStr()}`}>
+                <div className={`badge badge-${this.recordingColorStr()}`}>
                     {this.recordingStateStr()}
                 </div>
-
             </React.Fragment>
         )
     }
-}
+};
 
-export default TesterButton
+export default TesterButton;
